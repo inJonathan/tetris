@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tetris - Single</title>
   <link rel="stylesheet" href="../css/style.css">
@@ -15,8 +15,17 @@
     <div class="game" id="game"></div>
     <div class="next" id="next"></div>
     <div class="info">
-      <div>Time: <span id="time">0</span>s</div>
-      <div>Score: <span id="score">0</span></div>
+      <div>用时: <span id="time">0</span>s</div>
+      <div>得分: <span id="score">0</span> 分</div>
+      <div id="gameover"></div>
+    </div>
+    <div class="click" id="click">
+      <div id="newGame">NEW</div>
+      <div id="up">U</div>
+      <div id="left">L</div>
+      <div id="right">R</div>
+      <div id="down">D</div>
+      <div id="fall">FALL</div>
     </div>
   </div>
 
