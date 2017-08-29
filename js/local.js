@@ -29,32 +29,6 @@ var Local = function () {
     }
   }
 
-  // 屏幕按钮事件
-  var bindClickEvent = function () {
-    document.onclick = function (e) {
-      var target = e.target.getAttribute("id")
-      if (target === "up") {
-        game.rotate();
-      } else if (target === "right") {
-        game.right();
-      } else if (target === "down") {
-        game.down();
-      } else if (target === "left") {
-        game.left();
-      } else if (target === "fall") {
-        game.fall();
-      } else if (target === "newGame") {
-        location.reload();
-        // document.getElementById("gameover").innerText = "";
-        // document.getElementById("time").innerText = "0";
-        // document.getElementById("score").innerText = "0";
-        // stop();
-        // time = 0;
-        // start();
-      }
-    }
-  }
-
   // 移动
   var move = function () {
     timeFunc();
@@ -125,7 +99,6 @@ var Local = function () {
     game = new Game();
     game.init(doms, generateType(), generateDir());
     bindKeyEvent();
-    bindClickEvent();
     game.performNext(generateType(), generateDir());
     timer = setInterval(move, INTERVAL);
   }

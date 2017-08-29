@@ -61,7 +61,7 @@ var Game = function () {
       var div = [];
       for (var j=0; j<data[0].length; j++) {
         var newNode = document.createElement('div');
-        newNode.className = 'block none';
+        newNode.className = 'none';
         newNode.style.top = (i*20)+'px';
         newNode.style.left = (j*20)+'px';
         container.appendChild(newNode);
@@ -76,11 +76,11 @@ var Game = function () {
     for (var i=0; i<data.length; i++) {
       for (var j=0; j<data[0].length; j++) {
         if (data[i][j] == 0) {
-          divs[i][j].className = 'block none';
+          divs[i][j].className = 'none';
         } else if (data[i][j] == 1) {
-          divs[i][j].className = 'block done';
+          divs[i][j].className = 'done';
         } else if (data[i][j] == 2) {
-          divs[i][j].className = 'block current';
+          divs[i][j].className = 'current';
         }
       }
     }
