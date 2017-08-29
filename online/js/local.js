@@ -66,7 +66,7 @@ var Local = function () {
       timeCount = 0;
       time += 1;
       game.setTime(time);
-      if (time % 15 == 0) {
+      if (time % 30 == 0) { // 30秒生成一行
         game.addBotLine(generateBotLine(1));
       }
     }
@@ -90,11 +90,11 @@ var Local = function () {
   // 开始
   var start = function () {
     var doms = {
-      gameDiv: document.getElementById('game'),
-      nextDiv: document.getElementById('next'),
-      timeDiv: document.getElementById('time'),
-      scoreDiv: document.getElementById('score'),
-      resultDiv: document.getElementById('gameover'),
+      gameDiv: document.getElementById('local_game'),
+      nextDiv: document.getElementById('local_next'),
+      timeDiv: document.getElementById('local_time'),
+      scoreDiv: document.getElementById('local_score'),
+      resultDiv: document.getElementById('local_gameover'),
     }
     game = new Game();
     game.init(doms, generateType(), generateDir());
