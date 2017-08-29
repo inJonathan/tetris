@@ -97,7 +97,7 @@ body {
     border: 1px solid #1F1F1F;
 }
 
-#gameover {
+#local_gameover, #remote_gameover {
     color: red;
 }
 
