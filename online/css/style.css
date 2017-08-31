@@ -105,3 +105,8 @@ body {
     text-align: center;
     width: 100%;
 }
+
+#waiting {
+    margin-left: 10px;
+    color: #666;
+}

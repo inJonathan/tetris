@@ -1,4 +1,4 @@
-var Local = function () {
+var Local = function (socket) {
   // 游戏对象
   var game;
 
@@ -97,11 +97,23 @@ var Local = function () {
       resultDiv: document.getElementById('local_gameover'),
     }
     game = new Game();
-    game.init(doms, generateType(), generateDir());
+
+    var type = generateType();
+    var dir = generateDir();
+    game.init(doms, type, dir);
+    socket.emit('init', {type: type, dir: dir});
     bindKeyEvent();
-    game.performNext(generateType(), generateDir());
+    
+    var nextType = generateType();
+    var nextDir = generateDir();
+    game.performNext(nextType, nextDir);
+    socket.emit('next', {type: nextType, dir: nextDir});
+
     timer = setInterval(move, INTERVAL);
   }
 
-  this.start = start;
+  socket.on('start', function() {
+    document.getElementById('waiting').innerHTML = '';
+    start();
+  })
 }
