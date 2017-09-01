@@ -17,14 +17,19 @@ var Local = function (socket) {
     document.onkeydown = function (e) {
       if (e.keyCode == 38) { // up
         game.rotate();
+        socket.emit('rotate');
       } else if (e.keyCode == 39) { // right
         game.right();
+        socket.emit('right');
       } else if (e.keyCode == 40) { // down
         game.down();
+        socket.emit('down');
       } else if (e.keyCode == 37) { // left
         game.left();
+        socket.emit('left');
       } else if (e.keyCode == 32) { // space
         game.fall();
+        socket.emit('fall');
       }
     }
   }
@@ -34,17 +39,30 @@ var Local = function (socket) {
     timeFunc();
     if (!game.down()) {
       game.fixed();
+      socket.emit('fixed');
       var line = game.checkClear();
       if (line) {
         game.addScore(line);
+        socket.emit('line', line);
+        if (line > 1) {
+          var bottomLines = generateBotLine(line);
+          socket.emit('bottomLines', bottomLines);
+        }
       }
       var gameOver = game.checkGameOver();
       if (gameOver) {
         game.onGameOver(false);
+        document.getElementById('remote_gameover').innerHTML = '胜利 (^_^)∠※';
+        socket.emit('lose');
         stop();
       } else {
-        game.performNext(generateType(), generateDir());
+        var nextType = generateType();
+        var nextDir = generateDir();
+        game.performNext(nextType, nextDir);
+        socket.emit('next', {type: nextType, dir: nextDir});
       }
+    } else { // 如果判断可以向下移动，则发送移动的消息
+      socket.emit('down');
     }
   }
   // 随机生成干扰行
@@ -66,9 +84,7 @@ var Local = function (socket) {
       timeCount = 0;
       time += 1;
       game.setTime(time);
-      if (time % 30 == 0) { // 30秒生成一行
-        game.addBotLine(generateBotLine(1));
-      }
+      socket.emit('time', time);
     }
   }
   // 随机生成一个方块种类
@@ -115,5 +131,23 @@ var Local = function (socket) {
   socket.on('start', function() {
     document.getElementById('waiting').innerHTML = '';
     start();
-  })
+  });
+
+  // 对方输了
+  socket.on('lose', function() {
+    game.onGameOver(true);
+    stop();
+  });
+
+  // 对方掉线
+  socket.on('leave', function() {
+    document.getElementById('local_gameover').innerHTML = '对方掉线';
+    document.getElementById('remote_gameover').innerHTML = '已掉线';
+    stop();
+  });
+
+  socket.on('bottomLines', function(data) {
+    game.addBotLine(data); // 在我方页面的对方区域增加干扰行
+    socket.emit('addBotLine', data); // 在对方页面的我方区域增加干扰行
+  });
 }

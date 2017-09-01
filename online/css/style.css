@@ -97,6 +97,10 @@ body {
     border: 1px solid #1F1F1F;
 }
 
+.remote .current {
+    background-color: #6495ED;
+}
+
 #local_gameover, #remote_gameover {
     color: red;
 }
@@ -104,6 +108,10 @@ body {
 .tips {
     text-align: center;
     width: 100%;
+}
+
+.tips p {
+    margin: 10px 0;
 }
 
 #waiting {

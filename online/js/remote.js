@@ -3,13 +3,54 @@ var Remote = function (socket) {
   var game;
 
   // 按钮事件
-  var bindEvents = function () {
+  var bindEvents = function () { // 接收服务器转发过来的事件
     socket.on('init', function(data) {
       start(data.type, data.dir);
     });
     
     socket.on('next', function(data) {
       game.performNext(data.type, data.dir);
+    });
+    
+    socket.on('rotate', function(data) {
+      game.rotate();
+    });
+    
+    socket.on('right', function(data) {
+      game.right();
+    });
+    
+    socket.on('down', function(data) {
+      game.down();
+    });
+    
+    socket.on('left', function(data) {
+      game.left();
+    });
+    
+    socket.on('fall', function(data) {
+      game.fall();
+    });
+    
+    socket.on('fixed', function(data) {
+      game.fixed();
+    });
+    
+    socket.on('line', function(data) {
+      game.checkClear();
+      game.addScore(data);
+    });
+
+    socket.on('time', function(data) {
+      game.setTime(data);
+    });
+
+    socket.on('lose', function(data) {
+      game.onGameOver(false);
+    });
+
+    socket.on('addBotLine', function(data) {
+      game.addBotLine(data);
     });
   }
 

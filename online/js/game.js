@@ -260,7 +260,7 @@ var Game = function () {
   // 游戏结束
   var onGameOver = function (win) {
     if (win) {
-      resultDiv.innerHTML = '你赢了';
+      resultDiv.innerHTML = '胜利 (^_^)∠※';
     } else {
       resultDiv.innerHTML = '游戏结束';
     }
