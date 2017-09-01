@@ -128,9 +128,30 @@ var Local = function (socket) {
     timer = setInterval(move, INTERVAL);
   }
 
+  var onlineStatus = true;
+
   socket.on('start', function() {
     document.getElementById('waiting').innerHTML = '';
-    start();
+    document.getElementById('mask_title_wrap').style.display = 'none';
+    document.getElementById('countdown_wrap').style.display = 'block';
+
+    // 游戏开始倒计时
+    var count = 4;
+    var timer = setInterval(function () {
+      if (onlineStatus) {
+        if (count == 0) {
+          document.getElementById('mask').style.display = 'none';
+          clearInterval(timer);
+          start();
+        }
+        document.getElementById('countdown').innerHTML = count--;
+      } else {
+        document.getElementById('mask_title_wrap').style.display = 'block';
+        document.getElementById('mask_title').innerHTML = '对方掉线<a href="javascript:;" onclick="location.reload()">[重新匹配]</a>';
+        document.getElementById('countdown_wrap').style.display = 'none';
+        clearInterval(timer);
+      }
+    }, 1000);
   });
 
   // 对方输了
@@ -143,6 +164,7 @@ var Local = function (socket) {
   socket.on('leave', function() {
     document.getElementById('local_gameover').innerHTML = '对方掉线';
     document.getElementById('remote_gameover').innerHTML = '已掉线';
+    onlineStatus = false;
     stop();
   });
 

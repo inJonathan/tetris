@@ -118,3 +118,49 @@ body {
     margin-left: 10px;
     color: #666;
 }
+
+#mask {
+    z-index: 9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+#mask a {
+    color: #FF6900;
+}
+
+#mask a:active {
+    color: #FE9851;
+}
+
+#mask_title_wrap {
+    position: absolute;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    color: #fff;
+    font-size: 26px;
+}
+
+#countdown_wrap {
+    position: absolute;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    color: #00FF5A;
+    font-size: 26px;
+}
