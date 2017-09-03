@@ -164,6 +164,7 @@ var Local = function (socket) {
   socket.on('leave', function() {
     document.getElementById('local_gameover').innerHTML = '对方掉线';
     document.getElementById('remote_gameover').innerHTML = '已掉线';
+    document.getElementById('mask_title').innerHTML = '对方掉线<a href="javascript:;" onclick="location.reload()">[重新匹配]</a>';
     onlineStatus = false;
     stop();
   });
